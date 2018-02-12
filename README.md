@@ -21,6 +21,8 @@
 
 ### 效果图
 
-<img src='http://wxapps.sumslack.com/dazi/a1.png' alt='preview'/>
+<img src='http://wxapps.sumslack.com/dazi/a1.png' alt='首页'/>
 
-<img src='http://wxapps.sumslack.com/dazi/a2.png' alt='preview'/>
+<img src='http://wxapps.sumslack.com/dazi/a2.png' alt='我的'/>
+
+<img src='http://wxapps.sumslack.com/dazi/a3.png' alt='在线聊天'/>
