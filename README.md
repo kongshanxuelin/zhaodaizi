@@ -1,3 +1,5 @@
+[![QQ](http://pub.idqqimg.com/wpa/images/group.png)](https://jq.qq.com/?_wv=1027&k=5HWgxBZ)
+
 ## 项目简介
 
 这是一个利用OpenSumslack作为基础平台，使用Weex编写的一个找搭子的Weex项目，利用OpenSumslack作为iOS的容器，实现登录/注册,在线聊天，基于位置的共享社交平台；
@@ -16,3 +18,9 @@
 ### npm run build
 
 打包项目
+
+### 效果图
+
+<img src='http://wxapps.sumslack.com/dazi/a1.png' alt='preview'/>
+
+<img src='http://wxapps.sumslack.com/dazi/a2.png' alt='preview'/>
