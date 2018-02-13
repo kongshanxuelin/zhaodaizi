@@ -3,7 +3,6 @@ const Sumslack = require("../js/sumslack.js");
 
 export function login (cb) {
     Sumslack.login(function(json){
-        Sumslack.alert(Sumslack.print(json))
         var code = json.code;
         Sumslack.getConfig().code = code;
         Sumslack.request(Sumslack.getConfig().svrurl + "r/home/login",{"code":code}).then(data => {

@@ -32,6 +32,9 @@
           <text ref="daIcon" @click="dayixia(da.id)" class="text-grey pr20">搭一下{{da.numDaNum>0?'('+da.numDaNum+')':''}}</text>
           <ss-icon type="fontsumslack" @click.native="goComment(da.id)" color="#56bdad" :size="50">&#xe721;</ss-icon>
           <text @click="goComment(da.id)" class="text-grey pr20">评论{{da.numComment>0?'('+da.numComment+')':''}}</text>
+          
+          <ss-icon v-if="da.tel && da.tel!=''" type="fontsumslack" @click.native="callPhone(da.tel)" color="#56bdad" :size="50">&#xe77A;</ss-icon>
+          
       </div>
   </div>
 </template>
@@ -282,7 +285,7 @@
                   var _action = _menuItems[ret];
                   switch(_action){
                       case "分享...":
-                          Sumslack.shareWeixin("来自 "+userInfor.nick+" 的搭伙邀请","http://192.168.1.154:7080/invite/"+da.id, "[ "+ da.c+" ] "+ da.d + "\n  " + da.addr + "出发 " + da.dt + "集合");
+                          Sumslack.shareWeixin("来自 "+userInfor.nick+" 的找搭子邀请",Sumslack.getConfig().svrurl + "/invite/"+da.id, "[ "+ da.c+" ] "+ da.d + "\n  " + da.addr + "出发 " + da.dt + "集合");
                           break;
                       case "搭伙列表":
                           Sumslack.navigateTo("page.dalist",{"fid":did});
@@ -343,6 +346,11 @@
       goComment:function(did){
           Sumslack.navigateToEmojiPanel("评论列表","请输入评论","page.comment",{"fid":did});
           //Sumslack.navigateTo("page.comment",{"fid":did});
+      },
+      callPhone(tel){
+        Sumslack.makePhoneCall(tel,function(ret){
+                console.log("make phone call: 057482815326")
+        });
       }
     }
   };
