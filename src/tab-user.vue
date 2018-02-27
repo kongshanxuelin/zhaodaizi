@@ -32,6 +32,16 @@
           <switch slot="value"></switch>
         </wxc-cell>
         -->
+        <wxc-cell label="用户使用协议"
+          @wxcCellClicked="viewProtocal"
+          :has-arrow="true"
+          :has-margin="true"></wxc-cell>
+
+        <wxc-cell label="扫一扫"
+          @wxcCellClicked="scanIt"
+          :has-arrow="true"
+          :has-margin="true"></wxc-cell>
+
         <wxc-cell label="清理缓存"
           @wxcCellClicked="clearCache"
           :has-arrow="true"
@@ -101,6 +111,12 @@
       clearCache(){
         Sumslack.clearStorage();
         Sumslack.toast("清理缓存成功");
+      },
+      scanIt(){
+        Sumslack.scanQrCode();
+      },
+      viewProtocal(){
+        Sumslack.navigateTo("page.webview",{url:'http://wxapps.sumslack.com/dazi/protocal.html'});
       }
     }
   };

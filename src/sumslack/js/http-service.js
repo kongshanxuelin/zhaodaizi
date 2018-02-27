@@ -155,6 +155,15 @@ export function saveTel(tel, cb) {
     });
 }
 
+export function jubao(id,cb) {
+    getDaziToken(function (result) {
+        Sumslack.request(Sumslack.getConfig().svrurl + "r/dazi/jubao", { "token": result, "id": id }).then(data => {
+            data = Sumslack.toJSON(data);
+            cb(data);
+        });
+    });
+}
+
 export function getUser(cb) {
     getDaziToken(function (result) {
         Sumslack.request(Sumslack.getConfig().svrurl + "r/dazi/user", { "token": result}).then(data => {

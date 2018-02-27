@@ -28,13 +28,16 @@
       </div>  
       <div class="card-footer" style="margin-top:15px;">
           <text class="text-grey">{{da.createTime}}</text>
+
+          <ss-icon type="fontsumslack" @click.native="shareTimeline(da)" color="#56bdad" :size="50" style="margin-right:10px;margin-left:10px;">&#xe758;</ss-icon>
+
           <ss-icon type="fontsumslack" :ref="'btnDa_'+da.id" @click.native="dayixia(da.id)" color="#56bdad" :size="50">{{da.daFill?'\ue708':'\ue709'}}</ss-icon>
           <text ref="daIcon" @click="dayixia(da.id)" class="text-grey pr20">搭一下{{da.numDaNum>0?'('+da.numDaNum+')':''}}</text>
           <ss-icon type="fontsumslack" @click.native="goComment(da.id)" color="#56bdad" :size="50">&#xe721;</ss-icon>
           <text @click="goComment(da.id)" class="text-grey pr20">评论{{da.numComment>0?'('+da.numComment+')':''}}</text>
           
           <ss-icon v-if="da.tel && da.tel!=''" type="fontsumslack" @click.native="callPhone(da.tel)" color="#56bdad" :size="50">&#xe77A;</ss-icon>
-          
+
       </div>
   </div>
 </template>
@@ -269,6 +272,22 @@
           }
         }];
       },
+      shareTimeline(da){
+          Sumslack.getUserInfo().then( userInfor => {
+            Sumslack.shareWeixinTimeline(
+            "来自 "+userInfor.nick+" 的拼搭子"+(da.d?(' ['+da.d+'] '):"")+"邀请",
+            Sumslack.getConfig().svrurl + "/invite/"+da.id, 
+            "",
+            "http://wxapps.sumslack.com/dazi/img/" + da.cid + ".png",
+            function(json){
+                if(parseInt(json) == 1){
+                    Sumslack.alert("分享成功！");
+                }else{
+                    Sumslack.alert("您取消了分享！");
+                }
+            });
+          });
+      },
       showMoreAction:function(da){
           var did = da.id;
           var createor = da.uid;
@@ -277,15 +296,27 @@
               var _uid = userInfor.id;
               var _menuItems = [];
               if(parseInt(_uid) === parseInt(createor)){
-                  _menuItems = ["分享...","搭伙列表","目的地导航","删除"];
+                  _menuItems = ["分享...","举报","搭伙列表","目的地导航","删除"];
               }else{
-                  _menuItems = ["分享...","目的地导航"];
+                  _menuItems = ["分享...","举报","目的地导航"];
               }
               Sumslack.showActionSheet({"itemList":_menuItems},function(ret) {
                   var _action = _menuItems[ret];
                   switch(_action){
                       case "分享...":
-                          Sumslack.shareWeixin("来自 "+userInfor.nick+" 的找搭子邀请",Sumslack.getConfig().svrurl + "/invite/"+da.id, "[ "+ da.c+" ] "+ da.d + "\n  " + da.addr + "出发 " + da.dt + "集合");
+                          Sumslack.shareWeixin("来自 "+userInfor.nick+" 的拼搭子邀请",
+                          Sumslack.getConfig().svrurl + "/invite/"+da.id,
+                           "[ "+ da.c+" ] "+ da.d + "\n  " + da.addr + "出发 " + da.dt + "集合",
+                           "http://wxapps.sumslack.com/dazi/img/" + da.cid + ".png");
+                          break;
+                      case "举报":
+                          httpService.jubao(did,function(json){
+                            if(json.ret){
+                                Sumslack.alert("感谢您的举报，我们会第一时间审核！");
+                            }else{
+                                Sumslack.alert(json.msg || "举报失败！");
+                            }
+                          });
                           break;
                       case "搭伙列表":
                           Sumslack.navigateTo("page.dalist",{"fid":did});

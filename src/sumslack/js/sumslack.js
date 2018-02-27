@@ -361,6 +361,23 @@ export function openLocation(_lat,_lot,building,address){
     }
 }
 
+export function shareWeixinTimeline(title, url, description, logo, cb) {
+    if (!isSumslackEnv()) {
+        alert(config.Config.notSupport);
+        return;
+    }
+    sumslack.shareTimeline({
+        title: title || "标题",
+        description: description || title,
+        url: url,
+        logo: logo || ""
+    }, function (json) {
+        if (typeof (cb) === "function") {
+            cb(json);
+        }
+    });
+}
+
 export function shareWeixin(title,url,description,logo){
     if (sumslack && isSumslackEnv()) {
         if(typeof(logo)!= "undefined")
