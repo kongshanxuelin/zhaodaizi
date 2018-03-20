@@ -164,6 +164,15 @@ export function jubao(id,cb) {
     });
 }
 
+export function blackuser(touid,sts, cb) {
+    getDaziToken(function (result) {
+        Sumslack.request(Sumslack.getConfig().svrurl + "r/dazi/blackuser", { "token": result, "touid": touid,"sts":sts }).then(data => {
+            data = Sumslack.toJSON(data);
+            cb(data);
+        });
+    });
+}
+
 export function getUser(cb) {
     getDaziToken(function (result) {
         Sumslack.request(Sumslack.getConfig().svrurl + "r/dazi/user", { "token": result}).then(data => {

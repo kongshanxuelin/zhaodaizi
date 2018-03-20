@@ -19,6 +19,12 @@
 
 打包项目
 
+### 客户端下载
+
+苹果商店下载：
+
+<img src='http://h5.sumslack.com/pindazi.png' alt='首页'/>
+
 ### 效果图
 
 在苹果商店搜索“拼搭子”或weex playground的扫一扫预览效果：

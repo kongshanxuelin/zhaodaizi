@@ -231,12 +231,12 @@ export function openNativeUI(param){
     sumslack.pushViewController(param);
 }
 
-export function openProfile(uid){
+export function openProfile(uid,cb){
     if (!isSumslackEnv()) {
         alert(config.Config.notSupport);
         return;
     }
-    sumslack.openProfile(uid);
+    sumslack.openProfile(uid,cb);
 }
 
 export function makePhoneCall(phoneNumber){

@@ -125,7 +125,7 @@
 
       this.defaultSourceData = this.sourceData;
       
-      Sumslack.init("找搭子",[{"title":"刷新","href":"javascript:refreshUI"}],function(){
+      Sumslack.init("拼搭子",[{"title":"刷新","href":"javascript:refreshUI"}],function(){
         Sumslack.addGlobalEventListener("refreshUI",function(){
           Sumslack.refresh();
         });

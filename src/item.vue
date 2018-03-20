@@ -228,7 +228,26 @@
     },
     methods:{
       openProfile:function(uid){
-        Sumslack.openProfile(parseInt(uid));
+        Sumslack.openProfile(parseInt(uid),function(json){
+            json = Sumslack.toJSON(json);
+            if(json.type == 1){  //加入黑名单
+                httpService.blackuser(uid,"1",function(ret){
+                    if(ret.ret){
+                        Sumslack.alert("已成功将对方加入黑名单！");
+                    }else{
+                        Sumslack.alert(ret.msg);
+                    }
+                });
+            }else if(json.type == 2){ //移除黑名单
+                httpService.blackuser(uid,"0",function(ret){
+                    if(ret.ret){
+                        Sumslack.alert("已成功将对方移除黑名单！");
+                    }else{
+                        Sumslack.alert(ret.msg);
+                    }
+                });
+            }
+        });
       },
       previewImage(cimg,imgList){
          let curls = [];

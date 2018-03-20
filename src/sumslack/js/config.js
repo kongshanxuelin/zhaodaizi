@@ -17,9 +17,9 @@ module.exports = {
     ],
     Config:{
         notSupport: "该接口或功能仅在OpenSumslack移动端中支持！",
-        svrurl:"http://eform.sumslack.com/sumslack-zhaodazi/",
-        //svrurl: "http://192.168.1.154:7080/",
-        DEV:false,
+        //svrurl:"http://eform.sumslack.com/sumslack-zhaodazi/",
+        svrurl: "http://192.168.1.154:7080/",
+        DEV:true,
         //模拟登陆用户，在dev=true时有效
         testCode:"fb0e25752f27250ce114ccabe500de22",
         testUser: { 
