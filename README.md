@@ -29,7 +29,6 @@
 
 在苹果商店搜索“拼搭子”或weex playground的扫一扫预览效果：
 
-<img src='http://wxapps.sumslack.com/dazi/preview.png' alt='在线聊天'/>
 
 <img src='http://wxapps.sumslack.com/dazi/a1.png' alt='首页'/>
 
